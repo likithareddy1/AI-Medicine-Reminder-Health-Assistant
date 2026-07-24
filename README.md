@@ -1,287 +1,401 @@
 # 🩺 AI Medicine Reminder & Health Assistant (Agentic AI)
 
-An **Agentic AI-powered Medicine Reminder & Health Assistant** built using **LangGraph, LangChain, Ollama, RAG, FAISS, YOLOv8, MCP, and Voice AI**.
+An **Agentic AI-powered Healthcare Assistant** that helps users manage medicines through **AI chatbot, voice reminders, medicine image detection, and intelligent medical information retrieval**.
 
-This project creates an intelligent healthcare assistant that can understand user queries, provide medicine information, manage reminders, detect medicines from images, and support voice-based interaction.
+This project combines **LangGraph, LangChain, Ollama LLM, RAG, FAISS, YOLOv8, MCP (Model Context Protocol), Speech Recognition, Text-to-Speech, and Gradio** to build an intelligent medicine assistance system.
 
 ---
 
 # 🚀 Features
 
-✅ Agentic AI Multi-Agent System  
-✅ Medicine Information Assistant  
-✅ Medicine Reminder System  
-✅ RAG-based Medical Knowledge Retrieval  
+✅ Agentic AI Multi-Agent System using LangGraph  
+✅ AI Medicine Chatbot  
+✅ Medicine Information Retrieval using RAG  
 ✅ FAISS Vector Database  
 ✅ Medicine Image Detection using YOLOv8  
-✅ Voice Assistant  
+✅ Voice-Based Medicine Reminder  
+✅ Speech Recognition  
+✅ Text-to-Speech Response  
 ✅ MCP Tool Integration  
-✅ Gradio Dashboard  
+✅ Ollama Local LLM  
+✅ Gradio Interactive Dashboard  
+
+---
+
+# 🎯 Project Objective
+
+The goal of this project is to build an intelligent AI healthcare assistant that helps users:
+
+- Get medicine information
+- Understand medicine usage and side effects
+- Identify medicines from images
+- Set medicine reminders
+- Receive voice notifications
+- Interact with AI through voice and text
 
 ---
 
 # 🏗️ System Architecture
 
 ```
-                              USER
-                                |
-          -----------------------------------------
-          |                  |                    |
-          ↓                  ↓                    ↓
+                           USER
+                             |
+        --------------------------------------------
+        |                    |                     |
+        ↓                    ↓                     ↓
 
-     Text Input        Image Input          Voice Input
+   Text Input          Image Input           Voice Input
 
-          |                  |                    |
-          ↓                  ↓                    ↓
+        |                    |                     |
+        ↓                    ↓                     ↓
 
-    LangGraph Agent      YOLOv8 Model      Speech Model
-          |              Medicine           Processing
-          |              Detection
-          |
-          ↓
+   LangGraph             YOLOv8          Speech Recognition
+    Agent              Detection          Speech-to-Text
 
-      Router Agent
+                             |
+                             ↓
 
-          |
-  ------------------------------------------------
-  |                 |              |              |
-  ↓                 ↓              ↓              ↓
+                       Router Agent
 
-Reminder Agent  Medicine Agent  Health Agent  Emergency Agent
+                             |
+       ------------------------------------------------
+       |                  |             |              |
+       ↓                  ↓             ↓              ↓
 
-          |
-          ↓
+ Reminder Agent   Medicine Agent  Health Agent  Emergency Agent
 
-        Ollama LLM + RAG + MCP Tools
+       |                  |             |              |
+       ------------------------------------------------
 
-          |
-          ↓
+                             |
+                             ↓
 
-       Final AI Response
+              Ollama LLM + RAG + MCP Tools
 
-          |
-          ↓
+                             |
+                             ↓
 
-       Gradio Dashboard
+                    Final AI Response
+
+                             |
+              --------------------------------
+              |                              |
+              ↓                              ↓
+
+       Gradio Dashboard              Text-to-Speech
+
+                                             |
+                                             ↓
+
+                                  🔊 Voice Reminder
 ```
 
 ---
 
-# 📂 Project Structure
+# 🔄 Voice Medicine Reminder Workflow
 
 ```
-AI-Medicine-Assistant/
+User Voice Command
 
-│
-├── ai-agents/
-│   ├── 01-chatbot.ipynb
-│   ├── 02-mcp-tools.ipynb
-│   ├── 02-mcp-pydantic.ipynb
-│   ├── 03-mcp-router.ipynb
-│   ├── aup_config.py
-│   ├── math_server.py
-│   ├── Medicine MCP Server.py
-│   └── README.md
-│
-├── medicine_data/
-│   ├── medicine_info.txt
-│   └── README.md
-│
-├── rag/
-│   ├── medicine_faiss/
-│   │   ├── index.faiss
-│   │   └── index.pkl
-│   │
-│   ├── 00-chatbot-norag.ipynb
-│   ├── 01-rag-chunking.ipynb
-│   ├── 02-rag-prompts.ipynb
-│   ├── 03-rag-pipeline-HyDE.ipynb
-│   ├── aup_config.py
-│   └── README.md
-│
-├── training_model/
-│   ├── medicine_dataset/
-│   │   ├── images/
-│   │   │   ├── train/
-│   │   │   │   ├── aspirin.jpg
-│   │   │   │   └── paracetamol.jpg
-│   │   │   │
-│   │   │   └── val/
-│   │   │       └── paracetamol.jpg
-│   │   │
-│   │   ├── labels/
-│   │   └── data.yaml
-│   │
-│   ├── runs/
-│   │   └── detect/
-│   │
-│   ├── Medicine Detection using YOLOv8.ipynb
-│   ├── medicine.yaml
-│   ├── yolov8n.pt
-│   └── Voice Assistant.ipynb
-│
-└── README.md
+        ↓
+
+Speech Recognition
+
+        ↓
+
+Convert Speech to Text
+
+        ↓
+
+LangGraph Router Agent
+
+        ↓
+
+Reminder Agent
+
+        ↓
+
+Extract Medicine Name & Time
+
+        ↓
+
+Create Reminder
+
+        ↓
+
+Scheduled Notification
+
+        ↓
+
+Text-to-Speech
+
+        ↓
+
+🔊 Voice Medicine Reminder
+```
+
+Example:
+
+```
+User:
+"Remind me to take Paracetamol at 9 PM"
+
+AI:
+"Reminder set successfully.
+I will remind you to take Paracetamol at 9 PM."
+
+At 9 PM:
+
+"Hello!
+It is time to take your Paracetamol medicine.
+Stay healthy."
 ```
 
 ---
 
-# 🛠️ Technologies Used
-
-## AI & LLM
-
-- LangGraph
-- LangChain
-- Ollama
-- Llama 3.1 8B
-- MCP (Model Context Protocol)
-
-## Retrieval Augmented Generation
-
-- FAISS Vector Database
-- Embeddings
-- Medical Knowledge Retrieval
-
-## Computer Vision
-
-- YOLOv8
-- OpenCV
-- Image Detection
-
-## Voice AI
-
-- Speech Recognition
-- Text-to-Speech
-
-## Dashboard
-
-- Gradio
-
----
-
-# 🤖 AI Agent Architecture
+# 🤖 Agent Architecture
 
 ## Router Agent
 
-Classifies user requests and forwards them to the correct agent.
+The Router Agent analyzes user requests and routes them to the appropriate agent.
 
-## Medicine Agent
-
-Provides:
-- Medicine information
-- Uses
-- Side effects
-- Drug details
-
-Uses:
-- LLM
-- RAG Pipeline
-- FAISS Retrieval
+---
 
 ## Reminder Agent
 
-Handles:
-- Medicine schedules
-- Reminder requests
+Responsible for:
+
+- Creating medicine reminders
+- Managing reminder schedules
+- Providing voice notifications
+
+---
+
+## Medicine Agent
+
+Responsible for:
+
+- Medicine information
+- Usage details
+- Side effects
+- Drug-related questions
+
+Uses:
+
+- RAG
+- FAISS
+- Medical knowledge database
+
+---
 
 ## Health Agent
 
-Provides general health guidance.
+Provides general health-related assistance.
+
+---
 
 ## Emergency Agent
 
-Handles emergency-related queries.
+Handles emergency-related requests.
 
 ---
 
 # 📚 RAG Pipeline
 
-Folder:
-
-```
-rag/
-```
-
-RAG improves response accuracy by retrieving information from medical documents.
-
-Workflow:
+The Retrieval Augmented Generation system improves AI responses using medical knowledge.
 
 ```
 Medicine Documents
-        |
+
         ↓
+
 Text Chunking
-        |
+
         ↓
-Embedding Generation
-        |
+
+Embeddings Generation
+
         ↓
+
 FAISS Vector Database
-        |
+
         ↓
+
 Retriever
-        |
+
         ↓
-LLM Response
-```
 
-Knowledge Source:
+Ollama LLM
 
-```
-medicine_data/medicine_info.txt
+        ↓
+
+Final Answer
 ```
 
 ---
 
 # 🔍 Medicine Detection using YOLOv8
 
-YOLOv8 detects medicines from uploaded images.
+YOLOv8 computer vision model is used to identify medicines from images.
 
 Workflow:
 
 ```
 Medicine Image
-        |
-        ↓
-Image Processing
-        |
-        ↓
+
+      ↓
+
 YOLOv8 Model
-        |
-        ↓
+
+      ↓
+
 Medicine Detection
-        |
-        ↓
-Medicine Information
-```
 
-Model:
+      ↓
 
-```
-yolov8n.pt
+Medicine Name
+
+      ↓
+
+Retrieve Medicine Information
 ```
 
 ---
 
 # 🎙️ Voice Assistant
 
-Voice module provides:
+The voice module provides:
 
-- Voice input
+- Speech input
 - Speech recognition
 - AI response generation
 - Voice output
 
-Notebook:
+Workflow:
 
 ```
-training_model/Voice Assistant.ipynb
+Voice Input
+
+    ↓
+
+Speech Recognition
+
+    ↓
+
+AI Processing
+
+    ↓
+
+Response Generation
+
+    ↓
+
+Text-to-Speech
+
+    ↓
+
+Voice Output
+```
+
+---
+
+# 🛠️ Technologies Used
+
+## Artificial Intelligence
+
+- LangGraph
+- LangChain
+- Ollama
+- Llama 3.1 8B
+- MCP
+
+## Retrieval Augmented Generation
+
+- FAISS
+- Sentence Transformers
+- Embeddings
+
+## Computer Vision
+
+- YOLOv8
+- OpenCV
+- Ultralytics
+
+## Voice
+
+- SpeechRecognition
+- pyttsx3
+- Text-to-Speech
+
+## Interface
+
+- Gradio
+
+---
+
+# 📂 Project Structure
+
+```
+AI-Medicine-Reminder-Health-Assistant
+
+│
+├── ai-agents
+│   │
+│   ├── 01-chatbot.ipynb
+│   ├── 02-a-mcp-tools.ipynb
+│   ├── 02-b-mcp-pydantic.ipynb
+│   ├── 03-mcp-router.ipynb
+│   ├── Medicine MCP Server.py
+│   ├── aup_config.py
+│   └── math_server.py
+│
+├── medicine_data
+│   └── medicine_info.txt
+│
+├── rag
+│   │
+│   ├── medicine_faiss
+│   │   ├── index.faiss
+│   │   └── index.pkl
+│   │
+│   ├── 00.chatbot-norag.ipynb
+│   ├── 01.rag-chunking.ipynb
+│   ├── 02.rag-prompts.ipynb
+│   └── 03.rag-pipeline-HyDE.ipynb
+│
+├── training_model
+│   │
+│   ├── Medicine Detection using YOLOv8.ipynb
+│   ├── Voice Assistant.ipynb
+│   ├── medicine.yaml
+│   │
+│   └── medicine_dataset
+│       ├── images
+│       ├── labels
+│       └── data.yaml
+│
+├── requirements.txt
+│
+└── README.md
 ```
 
 ---
 
 # ⚙️ Installation
 
-Create environment:
+Clone repository:
+
+```bash
+git clone https://github.com/likithareddy1/AI-Medicine-Reminder-Health-Assistant.git
+```
+
+Move into project:
+
+```bash
+cd AI-Medicine-Reminder-Health-Assistant
+```
+
+Create virtual environment:
 
 ```bash
 python -m venv venv
@@ -309,7 +423,21 @@ pip install -r requirements.txt
 
 ---
 
-# ▶️ Running Ollama
+# 🧠 Ollama Setup
+
+Install Ollama.
+
+Download Llama model:
+
+```bash
+ollama pull llama3.1:8b
+```
+
+Run Ollama:
+
+```bash
+ollama serve
+```
 
 Check models:
 
@@ -317,21 +445,11 @@ Check models:
 ollama list
 ```
 
-Run model:
-
-```bash
-ollama run llama3.1:8b
-```
-
-Start Ollama:
-
-```bash
-ollama serve
-```
-
 ---
 
-# ▶️ Running Agentic AI
+# ▶️ Running the Project
+
+## Run Agentic AI System
 
 Open:
 
@@ -341,23 +459,19 @@ ai-agents/03-mcp-router.ipynb
 
 Run all cells.
 
-The LangGraph Medicine Assistant will start.
-
 ---
 
-# ▶️ Running RAG System
+## Run RAG System
 
 Open:
 
 ```
-rag/03-rag-pipeline-HyDE.ipynb
+rag/03.rag-pipeline-HyDE.ipynb
 ```
-
-Run notebook to retrieve medicine information using FAISS.
 
 ---
 
-# ▶️ Running Medicine Detection
+## Run Medicine Detection
 
 Open:
 
@@ -365,11 +479,9 @@ Open:
 training_model/Medicine Detection using YOLOv8.ipynb
 ```
 
-Run the notebook for medicine image detection.
-
 ---
 
-# ▶️ Running Voice Assistant
+## Run Voice Assistant
 
 Open:
 
@@ -377,18 +489,55 @@ Open:
 training_model/Voice Assistant.ipynb
 ```
 
-Run cells and interact using voice commands.
+---
+
+# ⚡ AMD Compute Usage
+
+This project was developed using AMD GPU compute environment.
+
+AMD ROCm acceleration was used for AI development and experimentation.
+
+AMD compute helps in:
+
+- Running AI model workloads
+- Accelerating deep learning experiments
+- Supporting local LLM inference
+- Training and testing YOLOv8 models
+
+Technologies used:
+
+- AMD ROCm
+- PyTorch
+- Ollama
+- YOLOv8
 
 ---
 
-# 📌 Future Improvements
+# 📸 Screenshots
 
-- Real-time medicine reminder notifications
+(Add your screenshots here)
+
+Example:
+
+```
+assets/
+
+├── architecture.png
+├── gradio_dashboard.png
+├── medicine_detection.png
+└── voice_reminder.gif
+```
+
+---
+
+# 🔮 Future Improvements
+
 - Mobile application
-- User health profile management
+- Real-time medicine notifications
 - Medicine expiry detection
-- Doctor consultation integration
+- User health profile
 - SOS emergency calling
+- Doctor consultation integration
 - Multi-language voice support
 
 ---
@@ -406,16 +555,27 @@ Always consult healthcare professionals for medical decisions.
 # ⭐ Project Highlights
 
 ✔ Agentic AI Healthcare Assistant  
-✔ LangGraph Multi-Agent Architecture  
+✔ LangGraph Multi-Agent System  
 ✔ Ollama Local LLM  
 ✔ RAG + FAISS Medical Retrieval  
 ✔ MCP Tool Integration  
 ✔ YOLOv8 Medicine Detection  
-✔ Voice Assistant  
+✔ Voice-Based Medicine Reminder  
+✔ Speech AI Integration  
 ✔ Gradio Dashboard  
 
 ---
 
-# 🎯 Project Goal
+# 👩‍💻 Team Members
 
-To build an intelligent AI healthcare assistant that combines **Agentic AI, RAG, Computer Vision, and Voice Technology** to provide personalized medicine support and healthcare assistance.
+This project was developed as a team effort.
+
+### Team Members
+
+- **Likitha Reddy**  
+- **Naveen**  
+- **Thahiya**
+
+GitHub:
+
+https://github.com/likithareddy1
