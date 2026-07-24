@@ -513,21 +513,6 @@ Technologies used:
 
 ---
 
-# 📸 Screenshots
-
-(Add your screenshots here)
-
-Example:
-
-```
-assets/
-
-├── architecture.png
-├── gradio_dashboard.png
-├── medicine_detection.png
-└── voice_reminder.gif
-```
-
 ---
 
 # 🔮 Future Improvements
