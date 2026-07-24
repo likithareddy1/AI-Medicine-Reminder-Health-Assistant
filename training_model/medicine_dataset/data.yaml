@@ -1,0 +1,9 @@
+
+train: /notebooks/training_model/medicine_dataset/images/train
+val: /notebooks/training_model/medicine_dataset/images/val
+
+nc: 2
+
+names:
+  0: paracetamol
+  1: aspirin

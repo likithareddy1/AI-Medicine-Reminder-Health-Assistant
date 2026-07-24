@@ -1,0 +1,11 @@
+
+path: /notebooks/ai-agents/medicine_dataset
+
+train: images/train
+val: images/val
+
+names:
+  0: paracetamol
+  1: metformin
+  2: aspirin
+  3: lisinopril

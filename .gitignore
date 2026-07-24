@@ -1,0 +1,18 @@
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+
+# Gradio
+.gradio/
+
+# YOLO outputs
+runs/
+
+# Cache
+*.cache
+
+# Model weights (optional)
+*.pt
